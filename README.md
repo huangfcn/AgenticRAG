@@ -10,6 +10,14 @@ AgenticRAG is an advanced Retrieval-Augmented Generation (RAG) system built with
 2. **Corrective RAG**: Uses web search as a fallback when internal knowledge is insufficient
 3. **Self-RAG**: Implements self-correction mechanisms to reduce hallucinations
 
+### Deep Research Capabilities
+
+The system also includes a powerful deep research framework that can handle complex, multi-faceted queries:
+
+1. **Intelligent Query Planning**: Automatically generates multiple focused search queries from complex topics
+2. **Comprehensive Analysis**: Processes each sub-query through the full Agentic RAG pipeline
+3. **Report Generation**: Synthesizes all findings into a comprehensive, well-structured report
+
 ### Intelligent Query Routing
 
 The system automatically routes queries to one of three processing paths:
@@ -29,12 +37,12 @@ The system automatically routes queries to one of three processing paths:
 ```
 AgenticRAG/
 ├── notebooks/
-│   ├── AgenticRAG_1.ipynb        # Main RAG implementation
-│   ├── DeepResearch_1.ipynb       # Deep research system
+│   ├── AgenticRAG.ipynb              # Core RAG implementation
+│   ├── DeepResearch_with_AgenticRAG.ipynb # Main deep research system (NEW!)
 │   └── db/
-│       └── faiss_ilianweng_db/   # Pre-built FAISS vector database
+│       └── faiss_ilianweng_db/         # Pre-built FAISS vector database
 ├── resources/
-│   └── agenticrag_1.png          # System architecture diagram
+│   └── agenticrag_1.png                # System architecture diagram
 └── README.md
 ```
 
@@ -77,9 +85,27 @@ The Agentic RAG system follows a modular architecture with the following compone
 
 ## Usage
 
-### Main Agentic RAG System
+### Main Deep Research System with Agentic RAG
 
-Open and run `notebooks/AgenticRAG_1.ipynb` to use the main RAG system:
+Open and run `notebooks/DeepResearch_with_AgenticRAG.ipynb` to use the main deep research system:
+
+1. The system takes complex queries and automatically breaks them down into multiple focused sub-queries
+2. Each sub-query is processed through the full Agentic RAG pipeline with all reliability features
+3. Results are synthesized into a comprehensive report
+
+Example complex query: "What are the latest advancements in quantum computing?"
+
+The system will:
+1. Generate focused sub-queries like:
+   - "Recent breakthroughs in quantum hardware and qubit stability"
+   - "Latest quantum algorithms for optimization and machine learning"
+   - "Current industry applications of quantum computing"
+2. Process each through the Agentic RAG system with full reliability features
+3. Create a comprehensive report synthesizing all findings
+
+### Core Agentic RAG System
+
+Open and run `notebooks/AgenticRAG_1.ipynb` to use the core RAG system:
 
 1. The notebook will automatically load a pre-built FAISS vector database containing content from Lilian Weng's blog posts on:
    - LLM Agents
@@ -91,37 +117,38 @@ Open and run `notebooks/AgenticRAG_1.ipynb` to use the main RAG system:
    - Domain-specific questions (RAG pipeline)
    - Time-sensitive queries (web search fallback)
 
-### Deep Research System
-
-Open and run `notebooks/DeepResearch_1.ipynb` to use the deep research system:
-
-1. This system performs comprehensive research on a query by:
-   - Generating multiple search queries using an LLM planner
-   - Searching each query on the web and summarizing results
-   - Creating a comprehensive final report
-
 ## How It Works
 
-### Query Routing
+### Deep Research Framework (Main System)
 
-The system uses an LLM-based router to determine the best processing path for each query:
-- Direct responses for simple greetings
-- RAG pipeline for domain-specific questions
-- Web search for time-sensitive information
+The main system follows this architecture:
+```
+Main Deep Research Framework
+│
+├── Search Planner (generate multiple focused queries)
+│
+├── For each query:
+│   ├── AgenticRAG Framework
+│   │   ├── Query Routing
+│   │   ├── RAG Pipeline (with all reliability features)
+│   │   │   ├── Document Retrieval
+│   │   │   ├── Document Grading
+│   │   │   ├── Query Rewriting (if needed)
+│   │   │   └── Web Search Fallback
+│   │   └── Answer Generation
+│   └── Store individual answer
+│
+└── Final Report Generator (aggregate all answers)
+```
 
-### RAG Pipeline
+### Core Agentic RAG Pipeline
 
-1. **Document Retrieval**: Fetches relevant documents from the FAISS vector store
-2. **Document Grading**: Assesses relevance of retrieved documents using an LLM
-3. **Query Rewriting**: Improves queries when initial retrieval fails (up to 3 retries)
-4. **Web Fallback**: Uses web search when RAG approaches fail after maximum retries
-5. **Answer Generation**: Produces final responses based on available context
-
-### Deep Research System
-
-1. **Search Planning**: Generates multiple diverse search queries from the original query
-2. **Web Search Execution**: Executes searches for each query and summarizes results
-3. **Report Generation**: Creates a comprehensive report from all search summaries
+1. **Query Routing**: Determines the best processing path for each query
+2. **Document Retrieval**: Fetches relevant documents from the FAISS vector store
+3. **Document Grading**: Assesses relevance of retrieved documents using an LLM
+4. **Query Rewriting**: Improves queries when initial retrieval fails (up to 3 retries)
+5. **Web Fallback**: Uses web search when RAG approaches fail after maximum retries
+6. **Answer Generation**: Produces final responses based on available context
 
 ## Customization
 
